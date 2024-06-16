@@ -5,11 +5,11 @@
 
 ## How to Use
 
-To use **davinsci**, you need to have Python installed along with the Pillow library. 
+To use **Davinsci**, you need to have Python installed along with the Pillow library. 
 
 ## Usage
 
-run the script from the terminal. follow the menu
+Run the script from the terminal. Follow the menu
 
 ## Acknowledgments
 
