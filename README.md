@@ -9,12 +9,7 @@ To use **davinsci**, you need to have Python installed along with the Pillow lib
 
 ## Usage
 
-The script requires three arguments: the path to the image file, the desired width, and the desired height. Make sure to pass the image path within quotes.
-
-### example 
-python davinsci.py "path\to\your\image.jpg" width height
-
-python davinsci.py "D:\Programming\random\ascii_art\your_image.jpg" 375 250
+run the script from the terminal. follow the menu
 
 ## Acknowledgments
 
@@ -24,4 +19,5 @@ The idea for this project came from a Reddit [post](https://www.reddit.com/r/lea
 Art by Sri Sehshagiri KM
 ![sarathi](images/sarathiascii.jpg)
 ![trivikrama](images/trivikramaascii.jpg)
+![menu](images/menu.jpg)
 
