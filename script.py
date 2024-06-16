@@ -1,6 +1,6 @@
 from PIL import Image
 import sys
-def davinsci(path,w1,h1):
+def davinsci(path,w1,h1,cho):
     pim = Image.open(r'{}'.format(path))
     oim = pim.resize((w1,h1))#375 250
     im = oim.convert('RGB')
@@ -30,10 +30,24 @@ def davinsci(path,w1,h1):
             pixel = mat[x][y]
             avg = 0
             res = 0
-            for rgb in pixel:
-                res += rgb
-            avg = int(res/3)
-            bm.append(avg)
+            if(cho==1):
+                #print('Average')
+                for rgb in pixel:
+                    res += rgb
+                avg = int(res/3)
+                bm.append(avg)
+            elif(cho==2):
+                #print('Lightness')
+                avg = int((max(pixel) + min(pixel)) / 2)
+                bm.append(avg)
+            elif(cho==3):
+                #print('Luminosity')
+                r,g,b = pixel
+                avg = int((0.21*r + 0.72*g + 0.07*b))
+                bm.append(avg)
+
+
+                
     print('total pixels',len(bm))
     #print(bm)
 
@@ -57,15 +71,67 @@ def davinsci(path,w1,h1):
         #print(i)
         count+=1
         key = round(i/3.923) 
-        print(mapp[key],mapp[key],mapp[key],end='')
+        print(mapp[key],end='')
         if(count==w):
             print('\n')
             count=0
 
     #print(len(final))
 
-path = sys.argv[1]
+run_flag = 0
+flag = 0
+cho_hw = -1
+w2 = 1850
+h2 = 250
+ch = 1
+ch_flag = 0
+print('-----------------------------------------DAVINSCI-----------------------------------------')
+path = input('Enter Path (without quotes): ')
 pa = r'{}'.format(path)
-w2 = int(sys.argv [2])
-h2 = int(sys.argv[3])
-davinsci(pa,w2,h2)
+print('Default Setting (1850x250, Average) (9)')
+print('Change Resolution (1850x250) (1)')
+print('Change Brightness Matrix (2)')
+print('Run (4)')
+print('Exit (5)')
+print('The settings you do not change will be set with default choices')
+while ch_flag == 0:
+    cho_run = int(input('choice: '))
+    if cho_run == 1:
+        w2 = int(input('Width: '))
+        h2 = int(input('Height: '))
+        run_flag = 1
+        ch_flag = 0
+    elif cho_run == 2:
+        while(flag==0):
+            cho_bright = int(input('\n1.Average\n2.Lightness\n3.Luminosity\nEnter you choice: '))
+            if cho_bright == 1:
+                ch = 1
+                flag = 1
+                ch_falg = 0
+                run_flag = 1
+            elif cho_bright == 2:
+                ch = 2
+                flag = 1
+                ch_flag = 0
+                run_flag = 1
+            elif cho_bright == 3:
+                ch = 3
+                flag = 1
+                ch_flag = 0
+                run_flag = 1
+            else:
+                print('Enter Valid Choice')
+    elif cho_run == 4:
+        if run_flag == 1:
+            davinsci(pa,w2,h2,ch)
+            print(ch)
+            ch_flag = 1
+    elif cho_run == 9:
+        print(ch)
+        davinsci(pa,w2,h2,ch)
+        ch_flag = 1
+    elif cho_run == 5:
+        sys.exit()
+    else:
+        print('Enter Valid Choice')
+        ch_flag = 0
